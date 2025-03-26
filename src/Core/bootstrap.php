@@ -10,6 +10,9 @@ if (file_exists(__DIR__ . '/../../vendor/autoload.php')) {
     die('Composer のオートローダーが見つかりません。`composer install` を実行してください。');
 }
 
+// 設定ファイルの読み込み
+require_once __DIR__ . '/../../config/config.php';
+
 // エラー設定（アプリケーション設定に基づいて動的に設定）
 $appConfig = config('app');
 $isDebugMode = $appConfig['debug'] ?? false;
@@ -34,8 +37,6 @@ use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
-// 設定ファイルの読み込み
-require_once __DIR__ . '/../../config/config.php';
 
 /**
  * Slimアプリケーションを生成する

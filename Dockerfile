@@ -32,15 +32,22 @@ RUN cd /tmp && git clone https://github.com/infusion/PHP-Facedetect.git && \
     cd PHP-Facedetect && phpize && ./configure && make && make install && make clean && \
     docker-php-ext-enable facedetect
 
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN rm -rf /var/www/html
 
 # 新しいディレクトリ構造を作成
 RUN mkdir -p /var/www/public /var/www/src /var/www/config
 
+ADD composer.json /var/www/composer.json
+ADD composer.lock /var/www/composer.lock
+
+WORKDIR /var/www
+
+RUN composer install
+
 # 各ディレクトリにファイルをコピー
 ADD public /var/www/public
-ADD vendor /var/www/vendor
 ADD src /var/www/src
 ADD config /var/www/config
 ADD resources /var/www/resources
