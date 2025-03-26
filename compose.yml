@@ -1,0 +1,12 @@
+services:
+  php:
+      build:
+        context: .
+      ports:
+        - "8080:80"
+      volumes:
+        - ./public:/var/www/public
+        - ./vendor:/var/www/vendor
+        - ./src:/var/www/src
+        - ./config:/var/www/config
+        - ./resources:/var/www/resources

@@ -1,0 +1,4 @@
+/vendor
+/public/images/*.png
+/public/images/*.jpeg
+/public/images/*.jpg
